@@ -4,6 +4,10 @@ import { Link, withRouter, RouteComponentProps } from "react-router-dom";
 interface MyNavProps {
   title: string;
 }
+//this below also works but then we have to remove & RouteComponentProps from the (in line 12)
+// interface MyNavProps extends RouteComponentProps {
+//     title: string;
+//   }
 
 const MyNav = (props: MyNavProps & RouteComponentProps) => (
   <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
