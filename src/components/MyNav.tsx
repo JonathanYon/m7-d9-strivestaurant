@@ -4,11 +4,8 @@ import { Link, withRouter, RouteComponentProps } from "react-router-dom";
 interface MyNavProps {
   title: string;
 }
-interface LProps {
-  location: string;
-}
 
-const MyNav = (props: MyNavProps & RouteComponentProps<LProps>) => (
+const MyNav = (props: MyNavProps & RouteComponentProps) => (
   <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
     <Link to="/">
       <Navbar.Brand>{props.title}</Navbar.Brand>

@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 
 const ReservationForm = () => {
@@ -11,16 +11,12 @@ const ReservationForm = () => {
     specialRequests: "",
   });
 
-  const inputChange = (
-    value: string | number,
-    id: string,
-    checked?: boolean
-  ) => {
-    // let id = e.target.id
+  const inputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    let id = e.target.id;
 
     setReservation({
       ...reservation,
-      [id]: id === "smoking" ? checked : value, //e.target.checked : e.target.value
+      [id]: id === "smoking" ? e.target.checked : e.target.value,
     });
   };
 
@@ -69,7 +65,7 @@ const ReservationForm = () => {
             placeholder="Enter name"
             value={reservation.name}
             id="name"
-            onChange={(e) => inputChange(e.target.value, e.target.id)}
+            onChange={inputChange}
           />
         </Form.Group>
         <Form.Group>
@@ -79,7 +75,7 @@ const ReservationForm = () => {
             placeholder="Enter phone"
             id="phone"
             value={reservation.phone}
-            onChange={(e) => inputChange(e.target.value, e.target.id)}
+            onChange={inputChange}
           />
         </Form.Group>
         <Form.Group>
@@ -88,7 +84,7 @@ const ReservationForm = () => {
             as="select"
             value={reservation.numberOfPersons}
             id="numberOfPersons"
-            onChange={(e) => inputChange(e.target.value, e.target.id)}
+            onChange={inputChange}
           >
             <option>1</option>
             <option>2</option>
@@ -104,9 +100,7 @@ const ReservationForm = () => {
             label="Do you smoke?"
             checked={reservation.smoking}
             id="smoking"
-            onChange={(e) =>
-              inputChange(e.target.value, e.target.id, e.target.checked)
-            }
+            onChange={inputChange}
           />
         </Form.Group>
         <Form.Group>
@@ -115,7 +109,7 @@ const ReservationForm = () => {
             type="datetime-local"
             value={reservation.dateTime}
             id="dateTime"
-            onChange={(e) => inputChange(e.target.value, e.target.id)}
+            onChange={inputChange}
           />
         </Form.Group>
         <Form.Group>
@@ -125,7 +119,7 @@ const ReservationForm = () => {
             rows={3}
             value={reservation.specialRequests}
             id="specialRequests"
-            onChange={(e) => inputChange(e.target.value, e.target.id)}
+            onChange={inputChange}
           />
         </Form.Group>
         <Button variant="primary" type="submit">
