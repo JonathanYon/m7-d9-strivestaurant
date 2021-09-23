@@ -1,11 +1,16 @@
-import { Carousel, Col, Container, Row } from 'react-bootstrap'
-import dishes from '../data/menu.json'
-import { useState } from 'react'
-import DishComments from './DishComments'
-import upperName from '../helpers/lib'
+import { Carousel, Col, Container, Row } from "react-bootstrap";
+import dishes from "../data/menu.json";
+import { useState } from "react";
+import DishComments from "./DishComments";
+import upperName from "../helpers/lib";
+import { Pasta } from "../types";
 
-const Home = ({ title }) => {
-  const [selected, setSelected] = useState(null)
+interface HomeProps {
+  title: string;
+}
+
+const Home = ({ title }: HomeProps) => {
+  const [selected, setSelected] = useState<Pasta | null>(null);
 
   return (
     <Container>
@@ -18,10 +23,14 @@ const Home = ({ title }) => {
               <Carousel.Item
                 key={dish.id}
                 onClick={() => {
-                  setSelected(dish)
+                  setSelected(dish as any);
                 }}
               >
-                <img className="d-block w-100" src={dish.image} alt={'slide number ' + (i + 1)} />
+                <img
+                  className="d-block w-100"
+                  src={dish.image}
+                  alt={"slide number " + (i + 1)}
+                />
                 <Carousel.Caption>
                   <h3>{dish.name}</h3>
                   <p>{dish.description}</p>
@@ -33,7 +42,7 @@ const Home = ({ title }) => {
         <DishComments selectedPasta={selected} />
       </Row>
     </Container>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
